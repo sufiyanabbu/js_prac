@@ -90,3 +90,5 @@ if(number%5 == 0){
 else{
     console.log(number," is not multiple of")
 }
+let name = prompt("enter your name");
+console.log("my name is",name);
