@@ -41,3 +41,14 @@ for(let mark of marks){
      mark = mark-offer;
      console.log(`the final price are ${mark}`);
 }
+
+// arrays methods
+
+let men = [1,2,3,4,5,6];
+let moreMen = men.splice(2,0,101);
+console.log(moreMen);
+
+let company = ["BloomBerg","Microsoft","uber","Google","ibm","Netflix"];
+company.shift();
+company.push("Amazon");
+console.log(company);
