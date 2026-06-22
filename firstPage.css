@@ -1,0 +1,9 @@
+div{
+    color: black;
+    background-color: red;
+}
+span{
+    color: red;
+    background-color: black;
+    width: auto;
+}
