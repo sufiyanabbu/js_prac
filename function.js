@@ -1,19 +1,19 @@
-function intro(){
-    console.log("i am sufiyan");
-    console.log("i love coding ");
-    console.log("i am 21 years old");
-}
+// function intro(){
+//     console.log("i am sufiyan");
+//     console.log("i love coding ");
+//     console.log("i am 21 years old");
+// }
 
-let a=prompt("enter a");
-let b=prompt("enter b");
-function add(a,b){
-    console.log(a+b);
-}
+// let a=prompt("enter a");
+// let b=prompt("enter b");
+// function add(a,b){
+//     console.log(a+b);
+// }
 
-intro();
-add(a,b);
-console.log("thank you");
-intro();
+// intro();
+// add(a,b);
+// console.log("thank you");
+// intro();
 // function add(a,b){
 //     console.log(a+b);
 // }
@@ -100,16 +100,16 @@ let arr = [10,20,30,40,50,60];
 
 //Question 
 
-let marks = [91,92,78,67,89,90];
+let marks = [87,93,63,99,86];
+let newArr = marks.filter((mark)=> mark>90);
+console.log(newArr);
 
-let topper = (marks)=>{
-    if(marks>89){   
-        console.log(marks);
-    }
-};
+// input n from user create an Array
+let n = prompt("enter n");
+let array = [];
+for(let i=0;i<n;i++){
+    array.unshift(i);
+}
+console.log(array);
 
-marks.forEach(topper);
-
-let newArr = marks.filter((mark)=> mark>89);
-console.log(newArr)
 

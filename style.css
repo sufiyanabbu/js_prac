@@ -1,5 +1,13 @@
-div {
-    background-color: red;
-    height: 500%;
-    width: 50%;
+h1{
+    color: brown;
+}
+h4{
+    color: red;
+}
+body{
+    background-color: yellow;
+}
+button{
+    background-color:blueviolet ;
+    size: 20cm;
 }
