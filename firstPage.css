@@ -1,3 +1,6 @@
+*{
+    background-color: rgb(115, 34, 47);
+}
 div{
     color: black;
     background-color: red;
@@ -6,4 +9,12 @@ span{
     color: red;
     background-color: black;
     width: auto;
+}
+
+.datah{
+    color: brown;
+    background-color: palevioletred;
+}
+.datab{
+    background-color: blue;
 }

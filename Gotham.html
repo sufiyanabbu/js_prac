@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Batman – The Dark Knight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #0a0a0a;
+      --coal:     #111111;
+      --graphite: #1c1c1c;
+      --steel:    #2a2a2a;
+      --gold:     #f0c040;
+      --amber:    #d4a820;
+      --fog:      #888888;
+      --white:    #f0ece0;
+      --red:      #b02020;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 17px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--coal); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 999;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 60px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+      backdrop-filter: blur(4px);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px; font-weight: 900;
+      color: var(--gold); letter-spacing: 4px; text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--fog); text-decoration: none;
+      font-family: 'Orbitron', sans-serif; font-size: 11px;
+      letter-spacing: 3px; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; height: 100vh; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=1800&q=80');
+      background-size: cover; background-position: center top;
+      filter: brightness(0.3) saturate(0.4);
+      transform: scale(1.05);
+      animation: subtle-zoom 20s ease-in-out infinite alternate;
+    }
+    @keyframes subtle-zoom {
+      from { transform: scale(1.05); }
+      to   { transform: scale(1.12); }
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, var(--black) 80%);
+    }
+
+    /* Bat Signal */
+    .bat-signal {
+      position: absolute; top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(240,192,64,0.08) 0%, transparent 70%);
+      animation: pulse-signal 4s ease-in-out infinite;
+    }
+    @keyframes pulse-signal {
+      0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(1); }
+      50%       { opacity: 1;   transform: translateX(-50%) scale(1.1); }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 0 20px;
+    }
+
+    /* Bat logo SVG inline */
+    .bat-icon {
+      width: 120px; margin: 0 auto 24px;
+      filter: drop-shadow(0 0 20px rgba(240,192,64,0.6));
+      animation: bat-float 3s ease-in-out infinite;
+    }
+    @keyframes bat-float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; letter-spacing: 6px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(72px, 12vw, 160px);
+      line-height: 0.9; letter-spacing: 4px;
+      color: var(--white);
+      text-shadow: 0 0 60px rgba(240,192,64,0.3), 0 4px 30px rgba(0,0,0,0.8);
+    }
+    .hero-title span { color: var(--gold); }
+    .hero-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 20px; font-weight: 600;
+      color: var(--fog); letter-spacing: 3px;
+      text-transform: uppercase; margin-top: 16px;
+    }
+    .hero-cta {
+      display: inline-block; margin-top: 40px;
+      padding: 14px 44px;
+      border: 2px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 12px; letter-spacing: 4px;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .hero-cta:hover {
+      background: var(--gold); color: var(--black);
+      box-shadow: 0 0 30px rgba(240,192,64,0.5);
+    }
+    .scroll-hint {
+      position: absolute; bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px; letter-spacing: 4px;
+      color: var(--fog); text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-hint::after {
+      content: ''; display: block; width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--fog), transparent);
+      margin: 8px auto 0;
+    }
+    @keyframes bounce {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex; align-items: center; gap: 20px;
+      padding: 0 60px; margin: 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--steel); }
+    .divider-bat {
+      width: 32px; opacity: 0.5;
+    }
+
+    /* ── QUOTE BAND ── */
+    .quote-band {
+      background: var(--graphite);
+      border-top: 1px solid var(--steel);
+      border-bottom: 1px solid var(--steel);
+      padding: 48px 60px;
+      text-align: center;
+    }
+    .quote-band blockquote {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 52px);
+      color: var(--white); letter-spacing: 2px;
+      line-height: 1.1;
+    }
+    .quote-band blockquote em {
+      color: var(--gold); font-style: normal;
+    }
+    .quote-attr {
+      margin-top: 16px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px; letter-spacing: 4px;
+      color: var(--fog); text-transform: uppercase;
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 60px; }
+    .section-eyebrow {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 10px; letter-spacing: 5px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 80px);
+      line-height: 1; color: var(--white);
+      margin-bottom: 24px;
+    }
+    .section-body {
+      font-size: 17px; color: var(--fog);
+      line-height: 1.8; max-width: 520px;
+    }
+
+    /* ── ORIGIN SECTION ── */
+    .origin {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center;
+    }
+    .origin-image-wrap {
+      position: relative;
+    }
+    .origin-image-wrap img {
+      width: 100%; height: 500px; object-fit: cover;
+      display: block;
+      filter: grayscale(60%) contrast(1.1);
+      border: 1px solid var(--steel);
+    }
+    .origin-image-wrap::before {
+      content: '';
+      position: absolute; top: 16px; left: 16px;
+      right: -16px; bottom: -16px;
+      border: 1px solid var(--gold);
+      opacity: 0.3; z-index: -1;
+    }
+    .origin-stat {
+      display: flex; gap: 40px; margin-top: 40px;
+    }
+    .stat { text-align: left; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px; color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px; letter-spacing: 3px;
+      color: var(--fog); text-transform: uppercase;
+    }
+
+    /* ── ARSENAL GRID ── */
+    .arsenal { background: var(--coal); }
+    .arsenal-header { text-align: center; margin-bottom: 60px; }
+    .arsenal-header .section-body { max-width: 560px; margin: 0 auto; text-align: center; }
+    .arsenal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px;
+    }
+    .arsenal-card {
+      position: relative; overflow: hidden;
+      cursor: default;
+    }
+    .arsenal-card img {
+      width: 100%; height: 320px; object-fit: cover; display: block;
+      filter: grayscale(70%) brightness(0.6);
+      transition: filter 0.5s, transform 0.5s;
+    }
+    .arsenal-card:hover img {
+      filter: grayscale(20%) brightness(0.8);
+      transform: scale(1.05);
+    }
+    .arsenal-card-info {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 24px 24px 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 60%, transparent);
+    }
+    .arsenal-card-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px; color: var(--white); letter-spacing: 2px;
+    }
+    .arsenal-card-desc {
+      font-size: 13px; color: var(--fog); margin-top: 4px;
+    }
+    .arsenal-card-tag {
+      display: inline-block; margin-top: 8px;
+      padding: 3px 10px;
+      border: 1px solid var(--gold);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase;
+    }
+
+    /* ── ROGUES ── */
+    .rogues-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px; margin-top: 56px;
+    }
+    .rogue-card {
+      background: var(--graphite);
+      border: 1px solid var(--steel);
+      padding: 0;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .rogue-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+    }
+    .rogue-card img {
+      width: 100%; height: 220px; object-fit: cover;
+      filter: grayscale(50%) contrast(1.1);
+      display: block;
+      transition: filter 0.3s;
+    }
+    .rogue-card:hover img { filter: grayscale(0%) contrast(1); }
+    .rogue-info { padding: 16px; }
+    .rogue-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; color: var(--white); letter-spacing: 2px;
+    }
+    .rogue-alias {
+      font-size: 12px; color: var(--fog); letter-spacing: 1px;
+    }
+    .rogue-threat {
+      display: flex; align-items: center; gap: 8px; margin-top: 10px;
+    }
+    .threat-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px; letter-spacing: 2px;
+      color: var(--fog); text-transform: uppercase;
+    }
+    .threat-bar { flex: 1; height: 3px; background: var(--steel); }
+    .threat-fill { height: 100%; background: var(--gold); }
+
+    /* ── TIMELINE ── */
+    .timeline-section { background: var(--graphite); }
+    .timeline {
+      position: relative; margin-top: 60px;
+      padding-left: 40px;
+    }
+    .timeline::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+    .timeline-item {
+      position: relative; margin-bottom: 48px; padding-left: 40px;
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -4px; top: 6px;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px var(--gold);
+    }
+    .timeline-year {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .timeline-event {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 26px; color: var(--white); letter-spacing: 1px;
+    }
+    .timeline-desc { font-size: 15px; color: var(--fog); margin-top: 6px; }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 4px; margin-top: 56px;
+    }
+    .gallery-item { overflow: hidden; position: relative; }
+    .gallery-item:first-child { grid-row: span 2; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      filter: grayscale(60%) brightness(0.7);
+      transition: filter 0.4s, transform 0.4s;
+    }
+    .gallery-item:hover img {
+      filter: grayscale(10%) brightness(1);
+      transform: scale(1.06);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--coal);
+      border-top: 1px solid var(--steel);
+      padding: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 22px; font-weight: 900;
+      color: var(--gold); letter-spacing: 5px;
+    }
+    .footer-tagline {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px; color: var(--fog); letter-spacing: 2px;
+      margin-top: 6px;
+    }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 9px; letter-spacing: 3px;
+      color: var(--fog); text-decoration: none;
+      text-transform: uppercase; transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy {
+      font-size: 12px; color: var(--steel); letter-spacing: 1px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      section { padding: 70px 24px; }
+      .origin { grid-template-columns: 1fr; gap: 40px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item:first-child { grid-row: span 1; grid-column: span 2; }
+      footer { flex-direction: column; gap: 24px; text-align: center; }
+      .quote-band { padding: 40px 24px; }
+      .divider { padding: 0 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<nav>
+  <a class="nav-logo" href="#">BATMAN</a>
+  <ul class="nav-links">
+    <li><a href="#origin">Origin</a></li>
+    <li><a href="#arsenal">Arsenal</a></li>
+    <li><a href="#rogues">Rogues</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#gallery">Gotham</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="bat-signal"></div>
+
+  <div class="hero-content">
+    <!-- Inline SVG Bat Logo -->
+    <div class="bat-icon">
+      <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#f0c040" d="M100 20
+          C100 20, 80 5, 55 10
+          C40 12, 20 18, 5 35
+          C20 32, 35 38, 45 50
+          C30 50, 15 55, 5 65
+          C20 60, 40 62, 50 70
+          C60 80, 80 85, 100 80
+          C120 85, 140 80, 150 70
+          C160 62, 180 60, 195 65
+          C185 55, 170 50, 155 50
+          C165 38, 180 32, 195 35
+          C180 18, 160 12, 145 10
+          C120 5, 100 20, 100 20Z"/>
+        <ellipse fill="#f0c040" cx="100" cy="55" rx="14" ry="18"/>
+      </svg>
+    </div>
+
+    <p class="hero-eyebrow">Gotham's Protector</p>
+    <h1 class="hero-title">THE<br/><span>DARK</span><br/>KNIGHT</h1>
+    <p class="hero-sub">Fear. Justice. Legacy.</p>
+    <a href="#origin" class="hero-cta">Enter The Cave</a>
+  </div>
+
+  <p class="scroll-hint">Scroll</p>
+</section>
+
+<!-- ── QUOTE BAND ── -->
+<div class="quote-band">
+  <blockquote>
+    "It's not who I am underneath,<br/>
+    but what I <em>do</em> that defines me."
+  </blockquote>
+  <p class="quote-attr">— Bruce Wayne · Batman Begins, 2005</p>
+</div>
+
+<!-- ── ORIGIN ── -->
+<section id="origin">
+  <div class="origin">
+    <div class="origin-image-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1509347528160-9a9e33742cdb?w=900&q=80"
+        alt="Dark cityscape representing Gotham"
+      />
+    </div>
+    <div>
+      <p class="section-eyebrow">The Beginning</p>
+      <h2 class="section-title">From Tragedy<br/>To Legend</h2>
+      <p class="section-body">
+        On a rain-soaked night in Gotham City, eight-year-old Bruce Wayne watched his parents, Thomas and Martha, gunned down in Crime Alley. That moment — raw, irreversible — became the fault line of a life.
+      </p>
+      <p class="section-body" style="margin-top:16px;">
+        Fuelled by grief and an unbreakable will, Bruce spent years training across the world: studying criminology in Europe, learning martial arts in Asia, mastering forensics and engineering at the finest institutions. He returned to Gotham not as a man — but as an idea. An idea that cannot be caged or killed.
+      </p>
+      <div class="origin-stat">
+        <div class="stat">
+          <div class="stat-number">127+</div>
+          <div class="stat-label">Combat Systems<br/>Mastered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">14</div>
+          <div class="stat-label">Years of<br/>World Training</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">0</div>
+          <div class="stat-label">Lives<br/>Taken</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div class="divider">
+  <div class="divider-line"></div>
+  <svg class="divider-bat" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#f0c040" d="M100 20 C100 20,80 5,55 10 C40 12,20 18,5 35 C20 32,35 38,45 50 C30 50,15 55,5 65 C20 60,40 62,50 70 C60 80,80 85,100 80 C120 85,140 80,150 70 C160 62,180 60,195 65 C185 55,170 50,155 50 C165 38,180 32,195 35 C180 18,160 12,145 10 C120 5,100 20,100 20Z"/>
+  </svg>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ── ARSENAL ── -->
+<section id="arsenal" class="arsenal">
+  <div class="arsenal-header">
+    <p class="section-eyebrow">Tools of Justice</p>
+    <h2 class="section-title">The Arsenal</h2>
+    <p class="section-body">Every gadget built, not bought off a shelf. Wayne Enterprises funds the mission; Bruce Wayne's genius shapes the instruments.</p>
+  </div>
+  <div class="arsenal-grid">
+    <div class="arsenal-card">
+      <img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=700&q=80" alt="Batsuit armour" />
+      <div class="arsenal-card-info">
+        <div class="arsenal-card-name">The Batsuit</div>
+        <div class="arsenal-card-desc">Nano-fibre weave. Kevlar-reinforced. Fireproof.</div>
+        <span class="arsenal-card-tag">Armour</span>
+      </div>
+    </div>
+    <div class="arsenal-card">
+      <img src="https://images.unsplash.com/photo-1541447270886-81a68ee48b2d?w=700&q=80" alt="Batarang weapon" />
+      <div class="arsenal-card-info">
+        <div class="arsenal-card-name">Batarang</div>
+        <div class="arsenal-card-desc">Precision-engineered titanium alloy. Returns on command.</div>
+        <span class="arsenal-card-tag">Projectile</span>
+      </div>
+    </div>
+    <div class="arsenal-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Grapnel gun" />
+      <div class="arsenal-card-info">
+        <div class="arsenal-card-name">Grapnel Gun</div>
+        <div class="arsenal-card-desc">300m range. Retractable carbon-fibre cable.</div>
+        <span class="arsenal-card-tag">Mobility</span>
+      </div>
+    </div>
+    <div class="arsenal-card">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=80" alt="Batmobile" />
+      <div class="arsenal-card-info">
+        <div class="arsenal-card-name">Batmobile</div>
+        <div class="arsenal-card-desc">Twin-turbine engine. Autopilot. Armoured hull.</div>
+        <span class="arsenal-card-tag">Vehicle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ROGUES GALLERY ── -->
+<section id="rogues">
+  <p class="section-eyebrow">Gotham's Underworld</p>
+  <h2 class="section-title">The Rogues Gallery</h2>
+  <p class="section-body">Every hero is defined by his enemies. Batman's are the most dangerous minds the world has ever failed to understand.</p>
+
+  <div class="rogues-grid">
+    <div class="rogue-card">
+      <img src="https://images.unsplash.com/photo-1531259683007-016a7b628fc3?w=500&q=80" alt="The Joker" />
+      <div class="rogue-info">
+        <div class="rogue-name">The Joker</div>
+        <div class="rogue-alias">The Clown Prince of Crime</div>
+        <div class="rogue-threat">
+          <span class="threat-label">Threat</span>
+          <div class="threat-bar"><div class="threat-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rogue-card">
+      <img src="https://images.unsplash.com/photo-1635273051977-7d2a81ab9e4a?w=500&q=80" alt="Two-Face" />
+      <div class="rogue-info">
+        <div class="rogue-name">Two-Face</div>
+        <div class="rogue-alias">Harvey Dent — Former D.A.</div>
+        <div class="rogue-threat">
+          <span class="threat-label">Threat</span>
+          <div class="threat-bar"><div class="threat-fill" style="width:80%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rogue-card">
+      <img src="https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=500&q=80" alt="The Penguin" />
+      <div class="rogue-info">
+        <div class="rogue-name">The Penguin</div>
+        <div class="rogue-alias">Oswald Cobblepot</div>
+        <div class="rogue-threat">
+          <span class="threat-label">Threat</span>
+          <div class="threat-bar"><div class="threat-fill" style="width:70%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rogue-card">
+      <img src="https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=500&q=80" alt="Bane" />
+      <div class="rogue-info">
+        <div class="rogue-name">Bane</div>
+        <div class="rogue-alias">The Man Who Broke the Bat</div>
+        <div class="rogue-threat">
+          <span class="threat-label">Threat</span>
+          <div class="threat-bar"><div class="threat-fill" style="width:95%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rogue-card">
+      <img src="https://images.unsplash.com/photo-1518085250887-2f903c200fee?w=500&q=80" alt="Scarecrow" />
+      <div class="rogue-info">
+        <div class="rogue-name">Scarecrow</div>
+        <div class="rogue-alias">Dr. Jonathan Crane</div>
+        <div class="rogue-threat">
+          <span class="threat-label">Threat</span>
+          <div class="threat-bar"><div class="threat-fill" style="width:75%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TIMELINE ── -->
+<section id="timeline" class="timeline-section">
+  <p class="section-eyebrow">Chronicle</p>
+  <h2 class="section-title">Batman's History</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">Year Zero</div>
+      <div class="timeline-event">Murder in Crime Alley</div>
+      <p class="timeline-desc">Thomas and Martha Wayne are killed. A child's innocence becomes the world's most powerful vow.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Years 1–14</div>
+      <div class="timeline-event">The Training Begins</div>
+      <p class="timeline-desc">Bruce studies under Ra's al Ghul, learns detective work at Cambridge, and hones his body into the world's ultimate weapon.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Year 14</div>
+      <div class="timeline-event">The Bat Descends</div>
+      <p class="timeline-desc">A bat crashes through the window of Wayne Manor study. The symbol is chosen. Batman is born.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Year 16</div>
+      <div class="timeline-event">The Joker Arrives</div>
+      <p class="timeline-desc">Gotham's most chaotic mind surfaces. The eternal confrontation between order and anarchy begins.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Year 22</div>
+      <div class="timeline-event">The Knightfall Crisis</div>
+      <p class="timeline-desc">Bane breaks the Bat. Bruce Wayne is shattered — and rebuilt. No enemy has done more to define his limits.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Ongoing</div>
+      <div class="timeline-event">The Vigil Continues</div>
+      <p class="timeline-desc">Gotham changes. Crime evolves. Batman endures. An idea, after all, cannot be destroyed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <p class="section-eyebrow">Gotham City</p>
+  <h2 class="section-title">The Dark City</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=900&q=80" alt="Gotham cityscape night" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=600&q=80" alt="Dark rooftop" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600&q=80" alt="Rainy street at night" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=600&q=80" alt="City lights" />
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Dark alley" />
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div>
+    <div class="footer-logo">BATMAN</div>
+    <div class="footer-tagline">I am the night. I am vengeance.</div>
+  </div>
+  <div class="footer-links">
+    <a href="#origin">Origin</a>
+    <a href="#arsenal">Arsenal</a>
+    <a href="#rogues">Rogues</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#gallery">Gotham</a>
+  </div>
+  <div class="footer-copy">© DC Comics · Batman™</div>
+</footer>
+
+</body>
+</html>
