@@ -12,3 +12,37 @@
     margin: 5px;
     background-color: bisque;
 }
+.class-one {
+    text-align: center;
+    background-color: cadetblue;
+}
+.new-box {
+    text-align: center;
+    background-color: antiquewhite;
+    height: 100px;
+    width: 100px;
+}
+#ball {
+    text-align: center;
+    background-color: chocolate;
+    height: 100px;
+    width: 100px;
+}
+#b1{
+    text-align: center;
+    background-color: chocolate;
+    height: 100px;
+    width: 100px;
+}
+#b2{
+    text-align: center;
+    background-color: chocolate;
+    height: 100px;
+    width: 100px;
+}
+
+.paragraph {
+    background-color: black;
+    color: white;
+    font-size: 20px;
+}
