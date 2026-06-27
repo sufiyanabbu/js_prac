@@ -1,0 +1,26 @@
+.box{
+    height: 100px;
+    width: 100px;
+    background-color: rgb(155, 54, 54);
+    border: 1px solid black;
+}
+p{
+    background-color: blue;
+    height: 50px;
+}
+.container{
+    background-color: rgb(222, 222, 222);
+    text-align: center;
+    height: 100px;
+    width: 100px;
+}
+#s1{
+    background-color: green;
+    text-align: center;
+    display: inline-block;
+}
+.section {
+    background-color: aliceblue;
+    height: 100px;
+    width: 100px;
+}
